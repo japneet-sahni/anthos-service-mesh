@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: productcatalogservice
+  namespace: product-catalog
+spec:
+  host: productcatalogservice
+  subsets:
+  - labels:
+      version: v1
+    name: v1
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: productcatalogservice
+  namespace: product-catalog
+spec:
+  hosts:
+  - productcatalogservice
+  http:
+  - route:
+    - destination:
+        host: productcatalogservice
+        subset: v1
