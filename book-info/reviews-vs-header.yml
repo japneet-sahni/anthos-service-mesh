@@ -8,12 +8,19 @@ spec:
   http:
   - match:
     - headers:
-        version:
-          exact: new
+        end-user:
+          exact: japneet
     route:
     - destination:
         host: reviews
         subset: v3
+    - headers:
+        user-agent:
+          regex: '.*Firefox.*'
+    route:
+    - destination:
+        host: reviews
+        subset: v2
   - route:
     - destination:
         host: reviews

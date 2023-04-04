@@ -231,5 +231,5 @@ kubectl rollout restart deployment
 
 kubectl apply -f book-info/reviews-vs-v1.yml
 kubectl apply -f book-info/reviews-vs-v1-v2-split.yml
-kubectl apply -f book-info/reviews-vs-v3-header.yml
+kubectl apply -f book-info/reviews-vs-header.yml
 ```
