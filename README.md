@@ -198,3 +198,38 @@ kubectl delete validatingwebhookconfiguration,mutatingwebhookconfiguration -l op
 asm-install/istioctl x uninstall --purge
 kubectl delete namespace istio-system asm-system --ignore-not-found=true
 ```
+
+# Book-Info Application
+```
+mkdir asm
+cd asm
+kpt pkg get \
+  https://github.com/japneet-sahni/anthos-service-mesh.git/book-info \
+  book-info
+
+curl https://storage.googleapis.com/csm-artifacts/asm/asmcli > asmcli
+chmod +x asmcli
+
+./asmcli install \
+  --project_id japneet-project \
+  --cluster_name cluster-1 \
+  --cluster_location us-central1-c \
+  --output_dir asm-install \
+  --enable_all \
+  --ca mesh_ca
+
+kubectl apply -f book-info/bookinfo.yml
+kubectl apply -f book-info/bookinfo-gateway.yml
+
+kubectl create namespace gatewayns
+kubectl label namespace gatewayns istio-injection=enabled --overwrite
+kubectl apply -n gatewayns -f asm-install/samples/gateways/istio-ingressgateway
+kubectl get service istio-ingressgateway  -n gatewayns
+
+kubectl label namespace default istio-injection=enabled
+kubectl rollout restart deployment
+
+kubectl apply -f book-info/reviews-vs-v1.yml
+kubectl apply -f book-info/reviews-vs-v2-header.yml
+kubectl apply -f book-info/reviews-vs-v1-v3-split.yml
+```
