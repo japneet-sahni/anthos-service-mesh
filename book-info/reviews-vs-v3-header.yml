@@ -8,8 +8,8 @@ spec:
   http:
   - match:
     - headers:
-        end-user:
-          exact: japneet
+        version:
+          exact: new
     route:
     - destination:
         host: reviews
