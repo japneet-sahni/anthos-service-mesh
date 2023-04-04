@@ -230,6 +230,19 @@ kubectl label namespace default istio-injection=enabled
 kubectl rollout restart deployment
 
 kubectl apply -f book-info/reviews-vs-v1.yml
+kubectl get pods
+
 kubectl apply -f book-info/reviews-vs-v1-v2-split.yml
 kubectl apply -f book-info/reviews-vs-header.yml
+
+# Deletion
+kubectl delete -f book-info/reviews-vs-v1.yml
+kubectl delete -f book-info/bookinfo.yml
+kubectl delete -f book-info/bookinfo-gateway.yml
+kubectl delete -n gatewayns -f asm-install/samples/gateways/istio-ingressgateway
+kubectl delete ns gatewayns
+kubectl delete validatingwebhookconfiguration,mutatingwebhookconfiguration -l operator.istio.io/component=Pilot
+asm-install/istioctl x uninstall --purge
+kubectl delete namespace istio-system asm-system --ignore-not-found=true
+rm -rf book-info
 ```
