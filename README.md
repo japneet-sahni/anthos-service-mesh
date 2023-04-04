@@ -245,4 +245,6 @@ kubectl delete validatingwebhookconfiguration,mutatingwebhookconfiguration -l op
 asm-install/istioctl x uninstall --purge
 kubectl delete namespace istio-system asm-system --ignore-not-found=true
 rm -rf book-info
+cd ..
+rm -rf asm
 ```
