@@ -230,6 +230,6 @@ kubectl label namespace default istio-injection=enabled
 kubectl rollout restart deployment
 
 kubectl apply -f book-info/reviews-vs-v1.yml
-kubectl apply -f book-info/reviews-vs-v1-v3-split.yml
-kubectl apply -f book-info/reviews-vs-v2-header.yml
+kubectl apply -f book-info/reviews-vs-v1-v2-split.yml
+kubectl apply -f book-info/reviews-vs-v3-header.yml
 ```
