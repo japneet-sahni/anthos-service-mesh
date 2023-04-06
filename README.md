@@ -232,6 +232,10 @@ kubectl rollout restart deployment
 kubectl apply -f book-info/reviews-vs-v1.yml
 kubectl get pods
 
+Version v1 doesn’t call the ratings service.
+Version v2 calls the ratings service, and displays each rating as black stars.
+Version v3 calls the ratings service, and displays each rating as red stars.
+
 kubectl apply -f book-info/reviews-vs-v1-v2-split.yml
 kubectl apply -f book-info/reviews-vs-header.yml
 
